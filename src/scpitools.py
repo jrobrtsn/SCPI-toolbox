@@ -10,7 +10,7 @@ class device(serial.Serial):
 
         self.name = device_name # SET BY USER, typically manufacturer and model number
         self.ID = device_ID # unique ID assigned by program so avoid conflicts
-        self.type = device_type # types are: `POWER_SUPPLY` `OSCILLOSCOPE` `MULTIMETER` `SOLDERING_IRON` `CUSTOM_SELECTION` ETC.. 
+        self.type = device_type # types are: `POWER_SUPPLY` = PSU `OSCILLOSCOPE` = DSO `MULTIMETER` = DMM `SOLDERING_IRON` = C_s `CUSTOM_SELECTION` = C_x ETC.. 
         self.limits = device_limitations # what commands are known to be defective, list
         self.write_timeout = TIMEOUT # dwell time for serial data transfer (write)
         self.timeout = TIMEOUT # dwell time for serial data transfer (read)
@@ -30,41 +30,45 @@ class device(serial.Serial):
     
     def disconnect(self):
         self.close()
+    
+
+    def Functions(self):
+        # generic functions for all scpi deviced go here. 
+
+    
+
+#================== device-unique functions ==========================
+
+#TODO
+# add all scpi commands as onject methods 
+# i.e. some set voltage would be object.Functions.Setvoltage(volts)
+#   amd would send relevant scpi command via serial 
+        if self.type == "DSO":
+            # oscilloscope-specific functions
+            print("testing")
+
+
+
+        if self.type == "DMM":
+            # multimeter-specific functions
+            print("testing")
+
+
+
+        if self.type == "PSU":
+            # power supply-specific functions
+            print("testing")
+
+
+
+        if self.type == "C_":
+            # custom defined device. needs more work 
+            raise TypeError("custom devices not supported")
         
 
 
 
 
-
-
-
-
-
-class SCPI_commandmaker():
-
-
-    def set_voltage(volts):
-        pass()
-
-    def set_ovr_volt(volts):
-        pass()
-
-    def set_current(amps):
-
-
-        pass()
-
-    def ser_ovr_current(amps):
-        pass()
-
-
-
-def connect_device():
-    # takes a serial port and a known device name. 
-
-
-
-def commandReader():
 
 
 
