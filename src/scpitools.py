@@ -4,7 +4,6 @@ import serial
 import sqlite3
 
 
-
 class device(serial.Serial):
     def __init__(self, device_name, device_ID, device_type, device_limitations, TIMEOUT, BAUD):
 
@@ -12,8 +11,8 @@ class device(serial.Serial):
         self.ID = device_ID # unique ID assigned by program so avoid conflicts
         self.type = device_type # types are: `POWER_SUPPLY` = PSU `OSCILLOSCOPE` = DSO `MULTIMETER` = DMM `SOLDERING_IRON` = C_s `CUSTOM_SELECTION` = C_x ETC.. 
         self.limits = device_limitations # what commands are known to be defective, list
-        self.write_timeout = TIMEOUT # dwell time for serial data transfer (write)
-        self.timeout = TIMEOUT # dwell time for serial data transfer (read)
+        self.write_timeout = TIMEOUT # time limit for serial data transfer (write)
+        self.timeout = TIMEOUT # time limit for serial data transfer (read)
         self.baudrate = BAUD 
     
 
@@ -32,41 +31,45 @@ class device(serial.Serial):
         self.close()
     
 
-    def Functions(self):
-        # generic functions for all scpi deviced go here. 
-
     
 
 #================== device-unique functions ==========================
 
-#TODO
-# add all scpi commands as onject methods 
-# i.e. some set voltage would be object.Functions.Setvoltage(volts)
-#   amd would send relevant scpi command via serial 
-        if self.type == "DSO":
-            # oscilloscope-specific functions
-            print("testing")
+class DMM(device):
+    def __init__(self):
+         pass 
+    
+    def SetRange(self, range):
+        
+        self.command = ("something" + range + "something else\r\n")
+        self.write(self.command)
+        self. range = (self.readline().decode())[1,1]  ] #TODO: put the right things here for it to work
 
 
 
-        if self.type == "DMM":
-            # multimeter-specific functions
-            print("testing")
 
 
+class DSO(device):
+    def __init__(self):
+        pass
+    
 
-        if self.type == "PSU":
-            # power supply-specific functions
-            print("testing")
-
-
-
-        if self.type == "C_":
-            # custom defined device. needs more work 
-            raise TypeError("custom devices not supported")
+    def SetTimebase(self, timebase):
+        self.command = ("something" + timebase + "something else\r\n")
+        self.write(self.command)
         
 
 
+
+
+class PSU(device):
+    def __init__(self):
+        pass
+    
+
+    def SetVoltage(self, voltage):
+        self.command = ("something" + voltage + "something else\r\n")
+        self.write(self.command)
 
 
 
