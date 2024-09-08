@@ -3,7 +3,7 @@
     "runtime" : "org.gnome.Platform",
     "runtime-version" : "46",
     "sdk" : "org.gnome.Sdk",
-    "command" : "scpi_powersupply_control",
+    "command" : "scpi-toolbox",
     "finish-args" : [
         "--share=network",
         "--share=ipc",
@@ -24,7 +24,7 @@
     ],
     "modules" : [
         {
-            "name" : "scpi_powersupply_control",
+            "name" : "scpi-toolbox",
             "builddir" : true,
             "buildsystem" : "meson",
             "sources" : [

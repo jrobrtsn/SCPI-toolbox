@@ -1,6 +1,6 @@
 [Desktop Entry]
-Name=scpi_powersupply_control
-Exec=scpi_powersupply_control
+Name=scpi-toolbox
+Exec=scpi-toolbox
 Icon=org.gnome.Example
 Terminal=false
 Type=Application

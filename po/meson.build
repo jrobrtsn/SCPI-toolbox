@@ -1,1 +1,1 @@
-i18n.gettext('scpi_powersupply_control', preset: 'glib')
+i18n.gettext('scpi-toolbox', preset: 'glib')
