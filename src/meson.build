@@ -1,9 +1,9 @@
 pkgdatadir = get_option('prefix') / get_option('datadir') / meson.project_name()
-moduledir = pkgdatadir / 'scpi_powersupply_control'
+moduledir = pkgdatadir / 'scpi_toolbox'
 gnome = import('gnome')
 
-gnome.compile_resources('scpi_powersupply_control',
-  'scpi_powersupply_control.gresource.xml',
+gnome.compile_resources('scpi-toolbox',
+  'scpi-toolbox.gresource.xml',
   gresource_bundle: true,
   install: true,
   install_dir: pkgdatadir,
@@ -18,18 +18,18 @@ conf.set('localedir', get_option('prefix') / get_option('localedir'))
 conf.set('pkgdatadir', pkgdatadir)
 
 configure_file(
-  input: 'scpi_powersupply_control.in',
-  output: 'scpi_powersupply_control',
+  input: 'scpi-toolbox.in',
+  output: 'scpi-toolbox',
   configuration: conf,
   install: true,
   install_dir: get_option('bindir'),
   install_mode: 'r-xr-xr-x'
 )
 
-scpi_powersupply_control_sources = [
+scpi_toolbox_sources = [
   '__init__.py',
   'main.py',
   'window.py',
 ]
 
-install_data(scpi_powersupply_control_sources, install_dir: moduledir)
+install_data(scpi_toolbox_sources, install_dir: moduledir)
