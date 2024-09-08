@@ -1,5 +1,6 @@
 # SCPI_INTERPERATATION_UTILITY
 
+
 import serial
 import sqlite3
 
@@ -30,6 +31,10 @@ class device(serial.Serial):
     def disconnect(self):
         self.close()
     
+    def SendCommand(self):
+        self.write(self.command)
+        self.flush()
+
 
     
 
@@ -43,7 +48,7 @@ class DMM(device):
         
         self.command = ("something" + range + "something else\r\n")
         self.write(self.command)
-        self. range = (self.readline().decode())[1,1]  ] #TODO: put the right things here for it to work
+        self.SendCommand() #TODO: put the right things here for it to work
 
 
 
@@ -56,7 +61,7 @@ class DSO(device):
 
     def SetTimebase(self, timebase):
         self.command = ("something" + timebase + "something else\r\n")
-        self.write(self.command)
+        self.SendCommand()
         
 
 
@@ -69,7 +74,7 @@ class PSU(device):
 
     def SetVoltage(self, voltage):
         self.command = ("something" + voltage + "something else\r\n")
-        self.write(self.command)
+        self.SendCommand()
 
 
 
