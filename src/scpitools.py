@@ -5,6 +5,16 @@ import serial
 import sqlite3
 
 
+
+
+class WrongModeError(Exception):
+    def __init__(self, message):
+        self.message = message
+
+class SettingError(Exception):
+    def __init__(self):
+        self.message = "could not set mode, function, or setting on device. device has returnrd an error. see error log database [not implemented yet]"
+
 class device(serial.Serial):
     def __init__(self, device_name, device_ID, device_type, device_limitations, TIMEOUT, BAUD):
 
@@ -44,11 +54,47 @@ class DMM(device):
     def __init__(self):
          pass 
     
-    def SetRange(self, range):
+    def SetVoltageRange(self, aRange):
         
-        self.command = ("something" + range + "something else\r\n")
+        if self.mode != "VOLTAGE_READ":
+            raise WrongModeError()
+        self.command = ("something" + aRange[0] + "something else\r\n")
         self.write(self.command)
         self.SendCommand() #TODO: put the right things here for it to work
+
+    
+    def SetResistanceRange(self, aRange):
+        
+        self.command = ("something" + aRange[0] + "something else\r\n")
+        self.write(self.command)
+        self.SendCommand() #TODO: put the right things here for it to work
+
+    def SetCurrentRange(self, aRange):
+        
+        self.command = ("something" + aRange[0] + "something else\r\n")
+        self.write(self.command)
+        self.SendCommand() #TODO: put the right things here for it to work
+
+    def SetACVoltageRange(self, aRange):
+        
+        self.command = ("something" + aRange[0] + "something else\r\n")
+        self.write(self.command)
+        self.SendCommand() #TODO: put the right things here for it to work
+    
+    def SetACCurrentRange(self, aRange):
+        
+        self.command = ("something" + aRange[0] + "something else\r\n")
+        self.write(self.command)
+        self.SendCommand() #TODO: put the right things here for it to work
+
+
+
+    def AutoRange(self):
+        self.command = ("something")
+        self.SendCommand()
+
+
+    
 
 
 
@@ -69,12 +115,37 @@ class DSO(device):
 
 class PSU(device):
     def __init__(self):
-        pass
+        self.current = 0
+        self.voltage = 0
+        self.LiveCurrent = 0
+        self.LiveVoltage = 0
+
     
+    # i think this is basically all the commands needed for power supplies. 
+
 
     def SetVoltage(self, voltage):
         self.command = ("something" + voltage + "something else\r\n")
         self.SendCommand()
+
+    def SetCurrentLim(self, current):
+        self.command = ("something" + current + "something else\r\n")
+        self.SendCommand()
+        
+    def SetMaxVoltage(self, voltage):
+        self.command = ("something" + voltage + "something else\r\n")
+        self.SendCommand()
+    
+    def SetMaxCurrentLim(self, current):
+        self.command = ("something" + current + "something else\r\n")
+        self.SendCommand()
+
+    def ReadLiveCurrent(self):
+        self.command = ("command for reading current")
+        self.SendCommand()
+        self.current = self.read()
+    
+        
 
 
 

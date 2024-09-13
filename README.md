@@ -1,9 +1,11 @@
-# scpi_powersupply_control
+# project info
 
 A description of this project.
 
 tool that allows automation of lab processes without using any kind of terminal. hides scpi behind a wrapper.
 should make graphing and data collection easier.
+
+will only support USB serial based devices.
 
 # important notice
 this project is no where near finished, DO NOT build it or install it. you will get errors. rignt now you will get the gnome-builder example app. no GUI features have been implemented yet.

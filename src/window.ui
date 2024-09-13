@@ -69,7 +69,7 @@
 
 			<item>
 				<attribute name="label" translatable="yes">_Add new power supply</attribute>
-				<attribute name ="action">app.addPSU</attribute>
+				<attribute name ="action">app.addPSU/attribute>
 			</item>
 
     </section>
